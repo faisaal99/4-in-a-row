@@ -35,7 +35,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
-column_positions = [ NodePath("PositionalNodes/Col1"), NodePath("PositionalNodes/Col2"), NodePath("PositionalNodes/Col3"), NodePath("PositionalNodes/Col4"), NodePath("PositionalNodes/Col5"), NodePath("PositionalNodes/Col6"), NodePath("PositionalNodes/Col7") ]
+column_position_refs = [ NodePath("PositionalNodes/Col1"), NodePath("PositionalNodes/Col2"), NodePath("PositionalNodes/Col3"), NodePath("PositionalNodes/Col4"), NodePath("PositionalNodes/Col5"), NodePath("PositionalNodes/Col6"), NodePath("PositionalNodes/Col7") ]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -52,25 +52,25 @@ __meta__ = {
 }
 
 [node name="Col1" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 58, 160 )
+position = Vector2( 58, 216 )
 
 [node name="Col2" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 94, 160 )
+position = Vector2( 94, 216 )
 
 [node name="Col3" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 130, 160 )
+position = Vector2( 130, 216 )
 
 [node name="Col4" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 166, 160 )
+position = Vector2( 166, 216 )
 
 [node name="Col5" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 202, 160 )
+position = Vector2( 202, 216 )
 
 [node name="Col6" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 238, 160 )
+position = Vector2( 238, 216 )
 
 [node name="Col7" type="Node2D" parent="PositionalNodes"]
-position = Vector2( 274, 160 )
+position = Vector2( 274, 216 )
 
 [node name="board" type="Sprite" parent="."]
 position = Vector2( 180, 320 )

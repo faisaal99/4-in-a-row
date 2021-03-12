@@ -14,7 +14,7 @@ const positions = [
 
 # Props
 const disc = preload("res://components/disc.tscn")
-export(Array) var column_positions
+export(Array) var column_position_refs
 
 func _on_column_pressed(_event, which_button):
 	if Input.is_action_just_pressed("click"):
@@ -35,14 +35,12 @@ func _add_disc_in_column(nr: int):
 			positions[nr][row] = 1
 			_spawn_disc(nr, row)
 			break
-	
-	print(positions[nr])
 
 func _spawn_disc(col: int, row: int):
-	var disc_scene = disc.instance()
-	var position_col = get_node(column_positions[col])
+	var disc_scene = disc.instance() as Disc
+	var position_col = get_node(column_position_refs[col])
 	
 	disc_scene.color = Constants.RED
-	disc_scene.position = position_col.position
+	disc_scene.position = position_col.position - Vector2(0, 56)
 	
 	add_child(disc_scene)

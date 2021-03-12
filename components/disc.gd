@@ -19,4 +19,3 @@ func _ready():
 		img.texture = yellow
 	else:
 		push_error("The 'color' input is incorrect, should use either Constants.RED or Constants.YELLOW")
-	print("Instanced")
