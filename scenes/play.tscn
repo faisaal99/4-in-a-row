@@ -38,6 +38,7 @@ __meta__ = {
 column_position_refs = [ NodePath("PositionalNodes/Col1"), NodePath("PositionalNodes/Col2"), NodePath("PositionalNodes/Col3"), NodePath("PositionalNodes/Col4"), NodePath("PositionalNodes/Col5"), NodePath("PositionalNodes/Col6"), NodePath("PositionalNodes/Col7") ]
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource( 1 )
 cell_size = Vector2( 30, 30 )
 format = 1
