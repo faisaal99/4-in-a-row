@@ -32,5 +32,18 @@ margin_bottom = 346.0
 [node name="PlayButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
 margin_right = 135.0
 margin_bottom = 53.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 1 )
+
+[node name="Highlight" type="ColorRect" parent="CenterContainer/VBoxContainer/PlayButton"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0.137255 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_hover"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_exit_hover"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
