@@ -37,10 +37,10 @@ func _add_disc_in_column(nr: int):
 			break
 
 func _spawn_disc(col: int, row: int):
-	var disc_scene = disc.instance() as Disc
-	var position_col = get_node(column_position_refs[col])
+	var disc_scene = disc.instance()
+	var col_pos = get_node(column_position_refs[col])
 	
-	disc_scene.color = Constants.RED
-	disc_scene.position = position_col.position - Vector2(0, 56)
+	disc_scene.color = GameLogic.get_player_and_switch()
+	disc_scene.position = col_pos.position - Vector2(0, 56)
 	
 	add_child(disc_scene)
