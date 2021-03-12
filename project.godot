@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Disc",
+"language": "GDScript",
+"path": "res://components/disc.gd"
+} ]
 _global_script_class_icons={
-
+"Disc": ""
 }
 
 [application]
@@ -18,6 +23,10 @@ _global_script_class_icons={
 config/name="4-In-A-Row"
 run/main_scene="res://scenes/play.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Constants="*res://logic/constants.gd"
 
 [display]
 
