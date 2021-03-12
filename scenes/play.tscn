@@ -150,6 +150,8 @@ rect_min_size = Vector2( 0, 30 )
 
 [node name="PlayMenuHUD" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="gui_input" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/1" to="." method="_on_column_pressed" binds= [ 0 ]]
 [connection signal="gui_input" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/2" to="." method="_on_column_pressed" binds= [ 1 ]]
 [connection signal="gui_input" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/3" to="." method="_on_column_pressed" binds= [ 2 ]]

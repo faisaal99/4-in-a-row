@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Disc",
 "language": "GDScript",
 "path": "res://components/disc.gd"
+}, {
+"base": "Node2D",
+"class": "PlayScene",
+"language": "GDScript",
+"path": "res://scenes/play.gd"
 } ]
 _global_script_class_icons={
-"Disc": ""
+"Disc": "",
+"PlayScene": ""
 }
 
 [application]

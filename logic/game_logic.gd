@@ -9,7 +9,7 @@ enum {
 # DON'T USE DIRECTLY, USE METHOD INSTEAD
 var _current_player = RED
 
-func get_player_and_switch():
+func get_color_and_switch():
 	var cp = _current_player
 	_switch_player()
 	return cp

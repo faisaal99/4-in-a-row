@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name PlayScene
+
 # Keep track of all possible positions in the grid
 # positions[columns][rows]
 const positions = [
@@ -12,9 +14,14 @@ const positions = [
 	[0, 0, 0, 0, 0, 0]
 ]
 
+# Children
+onready var tween = $Tween as Tween
+
 # Props
 const disc = preload("res://components/disc.tscn")
+const circle_and_gap_length = 36
 export(Array) var column_position_refs
+var _disc_scene: Node2D
 
 func _on_column_pressed(_event, which_button):
 	if Input.is_action_just_pressed("click"):
@@ -38,9 +45,20 @@ func _add_disc_in_column(nr: int):
 
 func _spawn_disc(col: int, row: int):
 	var disc_scene = disc.instance()
+	
+	# Get the node at the top most circle
+	# on the selected column, so we can extract the position
 	var col_pos = get_node(column_position_refs[col])
 	
-	disc_scene.color = GameLogic.get_player_and_switch()
-	disc_scene.position = col_pos.position - Vector2(0, 56)
+	# Set the begin and end positions for the Tween
+	# to end animate between
+	var initial_pos = col_pos.position + Vector2(0, -56)
+	var end_pos = col_pos.position + Vector2(0, circle_and_gap_length * row)
 	
+	disc_scene.color = GameLogic.get_color_and_switch()
+	disc_scene.position = initial_pos
 	add_child(disc_scene)
+	
+	var x = tween.interpolate_property(disc_scene, "position", initial_pos, end_pos, 1.0)
+	print(x)
+	
