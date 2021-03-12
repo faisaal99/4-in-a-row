@@ -26,9 +26,9 @@ func _add_disc_in_column(nr: int):
 	var max_index = float(positions[nr].size() - 1)
 	# Loop through the entire column from end to beginning (index 5 to 0)
 	# If the current position has a '1', go to the next one until there is a '0'
-	for col in range(max_index, -1, -1):
-		if positions[nr][col] == 0:
-			positions[nr][col] = 1
+	for row in range(max_index, -1, -1):
+		if positions[nr][row] == 0:
+			positions[nr][row] = 1
 			break
 	
 	print(positions[nr])
