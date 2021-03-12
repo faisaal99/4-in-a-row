@@ -59,6 +59,6 @@ func _spawn_disc(col: int, row: int):
 	disc_scene.position = initial_pos
 	add_child(disc_scene)
 	
-	var x = tween.interpolate_property(disc_scene, "position", initial_pos, end_pos, 1.0)
-	print(x)
+	tween.interpolate_property(disc_scene, "position", initial_pos, end_pos, 0.5)
+	tween.start()
 	

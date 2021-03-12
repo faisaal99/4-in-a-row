@@ -74,6 +74,7 @@ position = Vector2( 274, 216 )
 
 [node name="board" type="Sprite" parent="."]
 position = Vector2( 180, 320 )
+z_index = 1
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
