@@ -20,7 +20,7 @@ _global_script_classes=[ {
 "path": "res://scenes/play.gd"
 } ]
 _global_script_class_icons={
-"Disc": "",
+"Disc": "res://assets/textures/red.png",
 "PlayScene": ""
 }
 

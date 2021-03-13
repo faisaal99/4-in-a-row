@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Disc
+class_name Disc, "res://assets/textures/red.png"
 
 # Textures
 const red = preload("res://assets/textures/red.png")

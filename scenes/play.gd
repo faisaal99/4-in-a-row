@@ -61,7 +61,26 @@ func _spawn_disc(col: int, row: int):
 	disc_scene.position = initial_pos
 	add_child(disc_scene)
 	
-	tween.interpolate_property(disc_scene, "position", initial_pos, end_pos, 0.5, Tween.TRANS_QUAD, Tween.EASE_IN)
+	# The duration of the fall decreases as the column gets
+	# more and more filled
+	var fall_duration: float
+	match row:
+		5, 4:
+			fall_duration = 0.5
+		3, 2:
+			fall_duration = 0.4
+		_:
+			fall_duration = 0.3
+	
+	tween.interpolate_property(
+		disc_scene, 
+		"position", 
+		initial_pos, 
+		end_pos, 
+		fall_duration, 
+		Tween.TRANS_QUAD, 
+		Tween.EASE_IN
+	)
 	tween.start()
 
 # Called when the fall animation stops
