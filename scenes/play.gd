@@ -74,7 +74,7 @@ func _spawn_disc(col: int, row: int):
 			fall_duration = 0.3
 	
 	tween.interpolate_property(
-		disc_scene, 
+		disc_scene,
 		"position", 
 		initial_pos, 
 		end_pos, 
