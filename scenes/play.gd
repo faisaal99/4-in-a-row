@@ -4,6 +4,7 @@ class_name PlayScene
 
 # Keep track of all possible positions in the grid
 # positions[columns][rows]
+# 0 represents an empty position, 1 represents a taken one
 const positions = [
 	[0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0],
@@ -24,22 +25,22 @@ export(Array) var column_position_refs
 var _disc_scene: Node2D
 var _can_click = true
 
-func _on_column_pressed(_event, which_button):
+func _on_column_pressed(_event, which_column):
 	if Input.is_action_just_pressed("click") and _can_click:
 		# Make sure the player is able to put a
 		# piece in the selected column
-		if positions[which_button][0] == 0:
+		if positions[which_column][0] == 0:
 			_can_click = false
-			_add_disc_in_column(which_button)
+			_add_disc_in_column(which_column)
 		else:
 			pass # If the column is full
 
 # Add a disc at the specified column
 func _add_disc_in_column(nr: int):
-	var max_index = float(positions[nr].size() - 1)
+	var max_row_index = float(positions[nr].size() - 1)
 	# Loop through the entire column from end to beginning (index 5 to 0)
 	# If the current position has a '1', go to the next one until there is a '0'
-	for row in range(max_index, -1, -1):
+	for row in range(max_row_index, -1, -1):
 		if positions[nr][row] == 0:
 			positions[nr][row] = 1
 			_spawn_disc(nr, row)
