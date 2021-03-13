@@ -94,12 +94,94 @@ func _spawn_disc(col: int, row: int):
 func _on_tween_completed(object, _key):
 	var color = object.color
 	
-	var is_game_over = _check_winner()
+	var is_game_over = _check_winner(color)
 	
 	if is_game_over:
 		print("Someone won")
 	else:
 		_can_click = true
 
-func _check_winner():
+func _check_winner(color):
+	var is_vertical = _check_vertical(color)
+	var is_horizontal = _check_horizontal(color)
+	var is_forw_diagonal = _check_forw_diagonal(color)
+	var is_back_diagonal = _check_back_diagonal(color)
+	
+	if is_vertical or is_horizontal or is_forw_diagonal or is_back_diagonal:
+		return true
+	return false
+
+func _check_vertical(color):
+	var nr_of_occurrences := 0
+	for i in range(1, 4):
+		if _current_row + i <= 5:
+			if positions[_current_col][_current_row + i] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	if nr_of_occurrences == 3:
+		return true
+	return false
+
+func _check_horizontal(color):
+	var nr_of_occurrences := 0
+	# Going right
+	for i in range(1, 4):
+		if _current_col + i <= 6:
+			if positions[_current_col + i][_current_row] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	# Going left
+	for i in range(1, 4):
+		print(i)
+		if _current_col + i >= 0:
+			if positions[_current_col - i][_current_row] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	if nr_of_occurrences == 3:
+		return true
+	return false
+
+# /
+func _check_forw_diagonal(color):
+	var nr_of_occurrences := 0
+	# Going up-right
+	for i in range(1, 4):
+		if _current_col + i <= 6 and _current_row - i >= 0:
+			if positions[_current_col + i][_current_row - i] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	# Going down-left
+	for i in range(1, 4):
+		if _current_col - i >= 0 and _current_row + i <= 5:
+			if positions[_current_col - i][_current_row + i] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	if nr_of_occurrences == 3:
+		return true
+	return false
+
+# \
+func _check_back_diagonal(color):
+	var nr_of_occurrences := 0
+	# Going up-left
+	for i in range(1, 4):
+		if _current_col - i >= 0 and _current_row - i >= 0:
+			if positions[_current_col - i][_current_row - i] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	# Going down-right
+	for i in range(1, 4):
+		if _current_col + i <= 6 and _current_row + i <= 5:
+			if positions[_current_col + i][_current_row + i] == color:
+				nr_of_occurrences += 1
+			else:
+				break
+	if nr_of_occurrences == 3:
+		return true
 	return false
