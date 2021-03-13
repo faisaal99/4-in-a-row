@@ -11,9 +11,9 @@ onready var img = $Img
 
 # Props
 var color: int
-var _anim_end_position: int
 
 func _ready():
+	color = GameLogic.get_color_and_switch()
 	_decide_texture()
 
 func _decide_texture():
@@ -22,4 +22,4 @@ func _decide_texture():
 	elif color == Constants.YELLOW:
 		img.texture = yellow
 	else:
-		push_error("The 'color' input is incorrect, should use either Constants.RED or Constants.YELLOW")
+		push_error("The input for 'color' is incorrect, should use either Constants.RED or Constants.YELLOW")

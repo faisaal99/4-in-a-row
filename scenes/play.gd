@@ -4,15 +4,15 @@ class_name PlayScene
 
 # Keep track of all possible positions in the grid
 # positions[columns][rows]
-# 0 represents an empty position, 1 represents a taken one
+# -1 represents an empty position, 0 or 1 represents a taken one
 const positions = [
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0]
+	[-1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1]
 ]
 
 # Children
@@ -21,15 +21,19 @@ onready var tween = $Tween as Tween
 # Props
 const disc = preload("res://components/disc.tscn")
 const circle_and_gap_length = 36
+
 export(Array) var column_position_refs
+
 var _disc_scene: Node2D
 var _can_click = true
+var _current_col: int
+var _current_row: int
 
 func _on_column_pressed(_event, which_column):
 	if Input.is_action_just_pressed("click") and _can_click:
 		# Make sure the player is able to put a
 		# piece in the selected column
-		if positions[which_column][0] == 0:
+		if positions[which_column][0] == -1:
 			_can_click = false
 			_add_disc_in_column(which_column)
 		else:
@@ -39,11 +43,14 @@ func _on_column_pressed(_event, which_column):
 func _add_disc_in_column(nr: int):
 	var max_row_index = float(positions[nr].size() - 1)
 	# Loop through the entire column from end to beginning (index 5 to 0)
-	# If the current position has a '1', go to the next one until there is a '0'
+	# If the current position has a '-1', put a disc there,
+	# otherwise go to next one.
 	for row in range(max_row_index, -1, -1):
-		if positions[nr][row] == 0:
-			positions[nr][row] = 1
+		if positions[nr][row] == -1:
+			positions[nr][row] = GameLogic.get_color()
 			_spawn_disc(nr, row)
+			_current_col = nr
+			_current_row = row
 			break
 
 func _spawn_disc(col: int, row: int):
@@ -54,13 +61,8 @@ func _spawn_disc(col: int, row: int):
 	var col_pos = get_node(column_position_refs[col])
 	
 	# Set the begin and end positions for the Tween
-	# to end animate between
 	var initial_pos = col_pos.position + Vector2(0, -56)
 	var end_pos = col_pos.position + Vector2(0, circle_and_gap_length * row)
-	
-	disc_scene.color = GameLogic.get_color_and_switch()
-	disc_scene.position = initial_pos
-	add_child(disc_scene)
 	
 	# The duration of the fall decreases as the column gets
 	# more and more filled
@@ -72,6 +74,9 @@ func _spawn_disc(col: int, row: int):
 			fall_duration = 0.4
 		_:
 			fall_duration = 0.3
+	
+	disc_scene.position = initial_pos
+	add_child(disc_scene)
 	
 	tween.interpolate_property(
 		disc_scene,
@@ -85,5 +90,16 @@ func _spawn_disc(col: int, row: int):
 	tween.start()
 
 # Called when the fall animation stops
-func _on_tween_completed(object, key):
-	_can_click = true
+# Should calculate if there is a 4 in a row or not
+func _on_tween_completed(object, _key):
+	var color = object.color
+	
+	var is_game_over = _check_winner()
+	
+	if is_game_over:
+		print("Someone won")
+	else:
+		_can_click = true
+
+func _check_winner():
+	return false

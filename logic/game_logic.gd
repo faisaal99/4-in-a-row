@@ -1,5 +1,7 @@
 extends Node
 
+# RED = 0
+# YELLOW = 1
 enum {
 	RED, YELLOW
 }
@@ -13,6 +15,9 @@ func get_color_and_switch():
 	var cp = _current_player
 	_switch_player()
 	return cp
+
+func get_color():
+	return _current_player
 
 func _switch_player():
 	if _current_player == RED:
