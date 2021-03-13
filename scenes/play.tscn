@@ -161,3 +161,4 @@ visible = false
 [connection signal="gui_input" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/5" to="." method="_on_column_pressed" binds= [ 4 ]]
 [connection signal="gui_input" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/6" to="." method="_on_column_pressed" binds= [ 5 ]]
 [connection signal="gui_input" from="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/7" to="." method="_on_column_pressed" binds= [ 6 ]]
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
