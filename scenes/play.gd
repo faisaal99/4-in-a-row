@@ -21,6 +21,8 @@ onready var tween = $Tween as Tween
 # Props
 const disc = preload("res://components/disc.tscn")
 const circle_and_gap_length = 36
+const MAX_COL_INDEX = 6
+const MAX_ROW_INDEX = 5
 
 export(Array) var column_position_refs
 
@@ -28,6 +30,7 @@ var _disc_scene: Node2D
 var _can_click = true
 var _current_col: int
 var _current_row: int
+var _nr_of_occurrences := 0
 
 func _on_column_pressed(_event, which_column):
 	if Input.is_action_just_pressed("click") and _can_click:
@@ -112,24 +115,25 @@ func _check_winner(color):
 	return false
 
 func _check_vertical(color):
-	var nr_of_occurrences := 0
+	_nr_of_occurrences = 0
 	for i in range(1, 4):
 		if _current_row + i <= 5:
 			if positions[_current_col][_current_row + i] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
-	if nr_of_occurrences == 3:
+	if _nr_of_occurrences == 3:
 		return true
 	return false
 
 func _check_horizontal(color):
-	var nr_of_occurrences := 0
+	_nr_of_occurrences = 0
+	
 	# Going right
 	for i in range(1, 4):
 		if _current_col + i <= 6:
 			if positions[_current_col + i][_current_row] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
 	# Going left
@@ -137,51 +141,53 @@ func _check_horizontal(color):
 		print(i)
 		if _current_col + i >= 0:
 			if positions[_current_col - i][_current_row] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
-	if nr_of_occurrences == 3:
+	if _nr_of_occurrences == 3:
 		return true
 	return false
 
 # /
 func _check_forw_diagonal(color):
-	var nr_of_occurrences := 0
+	_nr_of_occurrences = 0
+	
 	# Going up-right
 	for i in range(1, 4):
 		if _current_col + i <= 6 and _current_row - i >= 0:
 			if positions[_current_col + i][_current_row - i] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
 	# Going down-left
 	for i in range(1, 4):
 		if _current_col - i >= 0 and _current_row + i <= 5:
 			if positions[_current_col - i][_current_row + i] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
-	if nr_of_occurrences == 3:
+	if _nr_of_occurrences == 3:
 		return true
 	return false
 
 # \
 func _check_back_diagonal(color):
-	var nr_of_occurrences := 0
+	_nr_of_occurrences = 0
+	
 	# Going up-left
 	for i in range(1, 4):
 		if _current_col - i >= 0 and _current_row - i >= 0:
 			if positions[_current_col - i][_current_row - i] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
 	# Going down-right
 	for i in range(1, 4):
 		if _current_col + i <= 6 and _current_row + i <= 5:
 			if positions[_current_col + i][_current_row + i] == color:
-				nr_of_occurrences += 1
+				_nr_of_occurrences += 1
 			else:
 				break
-	if nr_of_occurrences == 3:
+	if _nr_of_occurrences == 3:
 		return true
 	return false
