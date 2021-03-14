@@ -52,11 +52,12 @@ func _add_disc_in_column(nr: int):
 		if positions[nr][row] == -1:
 			positions[nr][row] = GameLogic.get_color()
 			_spawn_disc(nr, row)
-			_current_col = nr
-			_current_row = row
 			break
 
 func _spawn_disc(col: int, row: int):
+	_current_col = col
+	_current_row = row
+	
 	var disc_scene = disc.instance()
 	
 	# Get the node at the top most circle
@@ -116,6 +117,7 @@ func _check_winner(color):
 
 func _check_vertical(color):
 	_nr_of_occurrences = 0
+	
 	for i in range(1, 4):
 		if _current_row + i <= 5:
 			if positions[_current_col][_current_row + i] == color:
@@ -138,7 +140,6 @@ func _check_horizontal(color):
 				break
 	# Going left
 	for i in range(1, 4):
-		print(i)
 		if _current_col + i >= 0:
 			if positions[_current_col - i][_current_row] == color:
 				_nr_of_occurrences += 1

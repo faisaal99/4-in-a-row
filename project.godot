@@ -33,7 +33,6 @@ config/icon="res://icon.png"
 [autoload]
 
 GameLogic="*res://logic/game_logic.gd"
-Constants="*res://logic/constants.gd"
 
 [display]
 

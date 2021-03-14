@@ -17,9 +17,9 @@ func _ready():
 	_decide_texture()
 
 func _decide_texture():
-	if color == Constants.RED:
+	if color == GameLogic.RED:
 		img.texture = red
-	elif color == Constants.YELLOW:
+	elif color == GameLogic.YELLOW:
 		img.texture = yellow
 	else:
 		push_error("The input for 'color' is incorrect, should use either Constants.RED or Constants.YELLOW")
